@@ -445,6 +445,7 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
               <th>Status Picking</th>
               <th>Status Packing</th>
               <th>Status Atención</th>
+              <th>Observación</th>
             </tr>
           </thead>
           <tbody id="tablaDespacho"></tbody>
@@ -733,14 +734,15 @@ async function cargarDatos() {
     htmlDes += `
       <tr>
         <td>${d['Fecha Solicitud'] || '-'}</td>
-        <td>${d['Cliente"']       || '-'}</td>
+        <td>${d['Cliente']       || '-'}</td>
         <td>${d['Placa']       || '-'}</td>
         <td>${d['Cantidad OC']       || '-'}</td>
-        <td>${d['Cod. Motivo\r'] || d['Cod. Motivo'] || '-'}</td>
+        <td>${d['Cod. Motivo\n'] || '-'}</td>
         <td>${d['Tipo']       || '-'}</td>
         <td><span class="estado ${picking[1]}">${picking[0]}</span></td>
         <td><span class="estado ${packing[1]}">${packing[0]}</span></td>
         <td><span class="estado ${atencion[1]}">${atencion[0]}</span></td>
+        <td>${d['Observación']       || '-'}</td>
       </tr>`;
   });
 
