@@ -386,9 +386,9 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
         <table>
           <thead>
             <tr>
-              <th>N° Atención</th><th>Fecha Cita</th><th>Proveedor</th><th>Placa</th><th>Motivo</th>
+              <th>Fecha Cita</th><th>Proveedor</th><th>Placa</th><th>Motivo</th><th>Tipo</th>
               <th>Status Atención</th><th>Tiempo Atención</th>
-              <th>Status Acond.</th><th>Tiempo Acond.</th>
+              <th>Status Acond.</th><th>Observación</th>
             </tr>
           </thead>
           <tbody id="tablaRecepcion"></tbody>
@@ -701,15 +701,15 @@ async function cargarDatos() {
 
     htmlRec += `
       <tr>
-        <td>${r['N° Atención'] || '-'}</td>
         <td>${r['Fecha Cita']       || '-'}</td>
         <td>${r['Proveedor']       || '-'}</td>
         <td>${r['Placa']       || '-'}</td>
         <td>${r['Cod. Motivo'] || '-'}</td>
+        <td>${r['Tipo'] || '-'}</td>
         <td><span class="estado ${atencion[1]}">${atencion[0]}</span></td>
         <td>${diferencia(r['Hora Llegada'],        r['Hora Terminó'])}</td>
         <td><span class="estado ${acond[1]}">${acond[0]}</span></td>
-        <td>${diferencia(r['Inicio Acondicionado'], r['Fin Acondicionado'])}</td>
+        <td>${r['Observación'] || '-'}</td>
       </tr>`;
   });
 
