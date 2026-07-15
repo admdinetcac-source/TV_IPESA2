@@ -386,7 +386,7 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
         <table>
           <thead>
             <tr>
-              <th>Fecha Cita</th><th>Proveedor</th><th>Placa</th><th>Motivo</th><th>Tipo</th>
+              <th>Fecha Cita</th><th>Proveedor</th><th>Placa</th><th>Ordenes de Compra</th><th>Motivo</th><th>Tipo</th>
               <th>Status Atención</th><th>Tiempo Atención</th>
               <th>Status Acond.</th><th>Observación</th>
             </tr>
@@ -441,10 +441,10 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
         <table>
           <thead>
             <tr>
-              <th>N° Atención</th><th>Placa</th><th>Motivo</th>
-              <th>Status Picking</th><th>Tiempo Picking</th>
-              <th>Status Packing</th><th>Tiempo Packing</th>
-              <th>Status Atención</th><th>Tiempo Atención</th>
+              <th>Fecha Solicitud</th><th>Cliente</th><th>Placa</th><th>Ordenes de Pedido</th><th>Motivo</th><th>Tipo</th>
+              <th>Status Picking</th>
+              <th>Status Packing</th>
+              <th>Status Atención</th>
             </tr>
           </thead>
           <tbody id="tablaDespacho"></tbody>
@@ -487,8 +487,8 @@ const CONFIG = {
 
     // Tiempo de cada pantalla (segundos)
     duracion:[
-        20,
-        20
+        40,
+        40
     ]
 
 };
@@ -704,6 +704,7 @@ async function cargarDatos() {
         <td>${r['Fecha Cita']       || '-'}</td>
         <td>${r['Proveedor']       || '-'}</td>
         <td>${r['Placa']       || '-'}</td>
+        <td>${r['OC']       || '-'}</td>
         <td>${r['Cod. Motivo'] || '-'}</td>
         <td>${r['Tipo '] || '-'}</td>
         <td><span class="estado ${atencion[1]}">${atencion[0]}</span></td>
@@ -731,15 +732,15 @@ async function cargarDatos() {
 
     htmlDes += `
       <tr>
-        <td>${d['N° Atención'] || '-'}</td>
+        <td>${d['Fecha Solicitud'] || '-'}</td>
+        <td>${d['Cliente"']       || '-'}</td>
         <td>${d['Placa']       || '-'}</td>
+        <td>${d['Cantidad OC']       || '-'}</td>
         <td>${d['Cod. Motivo\r'] || d['Cod. Motivo'] || '-'}</td>
+        <td>${d['Tipo']       || '-'}</td>
         <td><span class="estado ${picking[1]}">${picking[0]}</span></td>
-        <td>${diferencia(d['Inicio Picking'], d['Fin Picking'])}</td>
         <td><span class="estado ${packing[1]}">${packing[0]}</span></td>
-        <td>${diferencia(d['Inicio Packing'], d['Fin Packing'])}</td>
         <td><span class="estado ${atencion[1]}">${atencion[0]}</span></td>
-        <td>${diferencia(d['Hora Llegada'],   d['Fin Carga'])}</td>
       </tr>`;
   });
 
