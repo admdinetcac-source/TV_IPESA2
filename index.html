@@ -387,7 +387,7 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
           <thead>
             <tr>
               <th>Fecha Cita</th><th>Proveedor</th><th>Placa</th><th>Ordenes de Compra</th><th>Motivo</th><th>Tipo</th>
-              <th>Status Atención</th><th>Tiempo Atención</th>
+              <th>Status Atención (Unidad)</th><th>Tiempo Atención(Unidad)</th>
               <th>Status Acond.</th><th>Observación</th>
             </tr>
           </thead>
@@ -444,7 +444,8 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
               <th>Fecha Solicitud</th><th>Cliente</th><th>Placa</th><th>Ordenes de Pedido</th><th>Motivo</th><th>Tipo</th>
               <th>Status Picking</th>
               <th>Status Packing</th>
-              <th>Status Atención</th>
+              <th>Status Atención(Unidad)</th>
+              <th>Tiempo Atención(Unidad)</th>
               <th>Observación</th>
             </tr>
           </thead>
@@ -742,6 +743,7 @@ async function cargarDatos() {
         <td><span class="estado ${picking[1]}">${picking[0]}</span></td>
         <td><span class="estado ${packing[1]}">${packing[0]}</span></td>
         <td><span class="estado ${atencion[1]}">${atencion[0]}</span></td>
+        <td>${diferencia(d['Hora Llegada'],   d['Fin Carga'])}</td>
         <td>${d['Observación']       || '-'}</td>
       </tr>`;
   });
