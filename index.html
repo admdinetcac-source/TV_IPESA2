@@ -129,9 +129,10 @@ html, body {
 }
 
 /* ============================================================
-   PANTALLA 1 — OPERACIONES (misma lógica del código original)
+   PANTALLA 1 (Recepción) y PANTALLA 2 (Despacho)
 ============================================================ */
-#pantalla-1 {
+#pantalla-1,
+#pantalla-2 {
   padding: 6px;
   overflow-y: auto;
 }
@@ -221,6 +222,13 @@ html, body {
   gap: 10px;
 }
 
+/* variante para pantallas individuales (solo 3 KPIs) */
+.kpis-3 {
+  grid-template-columns: repeat(3,1fr);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 .kpi {
   border-radius: 16px;
   padding: 14px;
@@ -251,6 +259,17 @@ html, body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+/* variante: un solo panel ocupando todo el ancho (pantallas de Recepción/Despacho) */
+.paneles-solo {
+  grid-template-columns: 1fr;
+}
+
+.paneles-solo table td,
+.paneles-solo table th {
+  font-size: 15px;
+  padding: 14px;
 }
 
 .panel {
@@ -334,10 +353,7 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
 <div class="tv-wrapper">
 
   <!-- ══════════════════════════════════════
-       PANTALLA 1 — OPERACIONES IPESA HYDRO
-  ══════════════════════════════════════ -->
-    <!-- ══════════════════════════════════════
-       PANTALLA 1 — OPERACIONES IPESA HYDRO
+       PANTALLA 1 — RECEPCIÓN
   ══════════════════════════════════════ -->
   <div class="pantalla activa" id="pantalla-1">
 
@@ -351,55 +367,75 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
       </div>
       <div class="header-right">
         <div class="slogan">¡CUMPLIMOS HOY,<br>SUPERAMOS JUNTOS!</div>
-        <div id="fechaHora" class="fechaHora"></div>
+        <div class="fechaHora js-reloj"></div>
       </div>
     </div>
 
     <div class="resumen">
-      <h2>📊 RESUMEN DIARIO</h2>
-      <div class="kpis">
+      <h2>📊 RESUMEN DE RECEPCIÓN</h2>
+      <div class="kpis kpis-3">
         <div class="kpi kpi-rec"><h4>🚚 RECEPCIONES TOTALES</h4><h2 id="rAtendidos">0</h2></div>
         <div class="kpi kpi-rec"><h4>⏳ REC. PENDIENTES</h4><h2 id="rPendientes">0</h2></div>
         <div class="kpi kpi-rec"><h4>📦 PALLETS REC.</h4><h2 id="rPallets">0</h2></div>
+      </div>
+    </div>
+
+    <div class="paneles paneles-solo">
+      <div class="panel">
+        <div class="panel-title rec-title">🚚 RECEPCIONES</div>
+        <table>
+          <thead>
+            <tr>
+              <th>N° Atención</th><th>Fecha Cita</th><th>Proveedor</th><th>Placa</th><th>Motivo</th>
+              <th>Status Atención</th><th>Tiempo Atención</th>
+              <th>Status Acond.</th><th>Tiempo Acond.</th>
+            </tr>
+          </thead>
+          <tbody id="tablaRecepcion"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="footer-ops">
+      <div class="footer-msg">
+        Tu trabajo mueve la operación,<br>
+        tu compromiso impulsa la excelencia operativa.
+      </div>
+      <img src="mascota-dinet.png" class="mascota" alt="Mascota">
+      
+    </div>
+
+  </div><!-- /pantalla-1 (Recepción) -->
+
+  <!-- ══════════════════════════════════════
+       PANTALLA 2 — DESPACHO
+  ══════════════════════════════════════ -->
+  <div class="pantalla" id="pantalla-2">
+
+    <div class="header">
+      <div class="header-left">
+        <img src="logo-dinet.png" class="logo-principal" alt="Logo">
+        <div class="titulo">
+          <h1>OPERACIONES IPESA HYDRO</h1>
+          <p>CONTROL OPERATIVO EN TIEMPO REAL</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="slogan">¡CUMPLIMOS HOY,<br>SUPERAMOS JUNTOS!</div>
+        <div class="fechaHora js-reloj"></div>
+      </div>
+    </div>
+
+    <div class="resumen">
+      <h2>📊 RESUMEN DE DESPACHO</h2>
+      <div class="kpis kpis-3">
         <div class="kpi kpi-des"><h4>🚛 DESPACHOS TOTALES</h4><h2 id="dAtendidos">0</h2></div>
         <div class="kpi kpi-des"><h4>⏳ DESP. PENDIENTES</h4><h2 id="dPendientes">0</h2></div>
         <div class="kpi kpi-des"><h4>📦 PALLETS DESP.</h4><h2 id="dPallets">0</h2></div>
       </div>
     </div>
 
-    <div class="paneles">
-<div class="panel">
-
-    <div class="panel-title rec-title">
-        🚚 RECEPCIONES
-    </div>
-
-    <table>
-
-        <thead>
-
-            <tr>
-                <th>N° Atención</th>
-                <th>Fecha Cita</th>
-                <th>Proveedor</th>
-                <th>Placa</th>
-                <th>Motivo</th>
-                <th>Status Atención</th>
-                <th>Tiempo Atención</th>
-                <th>Status Acond.</th>
-                <th>Tiempo Acond.</th>
-            </tr>
-
-        </thead>
-
-        <tbody id="tablaRecepcion">
-
-        </tbody>
-
-    </table>
-
-</div>
-
+    <div class="paneles paneles-solo">
       <div class="panel">
         <div class="panel-title des-title">🚛 DESPACHOS</div>
         <table>
@@ -425,120 +461,35 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
       
     </div>
 
-  </div><!-- /pantalla-1 -->
-<!-- ══════════════════════════════════════
-     PANTALLA 2 — DESPACHO
-══════════════════════════════════════ -->
-<div class="pantalla" id="pantalla-2">
+  </div><!-- /pantalla-2 (Despacho) -->
 
-    <div class="header">
-      <div class="header-left">
-        <img src="logo-dinet.png" class="logo-principal" alt="Logo">
-        <div class="titulo">
-          <h1>OPERACIONES IPESA HYDRO</h1>
-          <p>CONTROL OPERATIVO EN TIEMPO REAL</p>
-        </div>
-      </div>
+  <!-- ══════════════════════════════════════
+       PANTALLA 3 — POWER BI / URL #3
+       👉 Cambia el src por tu URL real
+  ══════════════════════════════════════ -->
+  <div class="pantalla" id="pantalla-3">
+    <iframe
+      id="iframe-3"
+      src=""
+      title="Pantalla 3"
+      allow="autoplay; fullscreen">
+    </iframe>
+  </div>
 
-      <div class="header-right">
-        <div class="slogan">
-          ¡CUMPLIMOS HOY,<br>SUPERAMOS JUNTOS!
-        </div>
 
-        <div id="fechaHora2" class="fechaHora"></div>
-      </div>
-    </div>
+  <!-- ══════════════════════════════════════
+       PANTALLA 4 — POWER BI / URL #4
+       👉 Cambia el src por tu URL real
+  ══════════════════════════════════════ -->
+  <div class="pantalla" id="pantalla-4">
+    <iframe
+      id="iframe-4"
+      src=""
+      title="Pantalla 4"
+      allow="autoplay; fullscreen">
+    </iframe>
+  </div>
 
-    <div class="resumen">
-
-      <h2>🚛 DESPACHOS DEL DÍA</h2>
-
-      <div class="kpis">
-
-        <div class="kpi kpi-des">
-            <h4>DESPACHOS</h4>
-            <h2 id="dAtendidos2">0</h2>
-        </div>
-
-        <div class="kpi kpi-des">
-            <h4>PENDIENTES</h4>
-            <h2 id="dPendientes2">0</h2>
-        </div>
-
-        <div class="kpi kpi-des">
-            <h4>PALLETS</h4>
-            <h2 id="dPallets2">0</h2>
-        </div>
-
-        <div class="kpi kpi-des">
-            <h4>PICKING</h4>
-            <h2 id="kpiPicking">0</h2>
-        </div>
-
-        <div class="kpi kpi-des">
-            <h4>PACKING</h4>
-            <h2 id="kpiPacking">0</h2>
-        </div>
-
-        <div class="kpi kpi-des">
-            <h4>FINALIZADOS</h4>
-            <h2 id="kpiFinalizados">0</h2>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="panel">
-
-        <div class="panel-title des-title">
-            🚛 DESPACHOS
-        </div>
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>N° Atención</th>
-                    <th>Placa</th>
-                    <th>Motivo</th>
-                    <th>Status Picking</th>
-                    <th>Tiempo Picking</th>
-                    <th>Status Packing</th>
-                    <th>Tiempo Packing</th>
-                    <th>Status Atención</th>
-                    <th>Tiempo Atención</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="tablaDespacho2">
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <div class="footer-ops">
-
-      <div class="footer-msg">
-
-        Tu trabajo mueve la operación,<br>
-        tu compromiso impulsa la excelencia operativa.
-
-      </div>
-
-      <img src="mascota-dinet.png"
-           class="mascota"
-           alt="Mascota">
-
-    </div>
-
-</div>
 </div><!-- /tv-wrapper -->
 
 
@@ -554,20 +505,28 @@ td { padding: 10px; font-size: 13px; font-weight: 600; border-bottom: 1px solid 
 
 /* ─────────────────────────────────────────────────────────
    ⚙️  CONFIGURACIÓN — ajusta aquí
-   Ahora solo existen 3 pantallas activas: 1, 3 y 4
-   (la pantalla 2 fue eliminada por completo)
+   Ahora existen 4 pantallas activas: 1 (Recepción),
+   2 (Despacho), 3 y 4 (Power BI)
 ───────────────────────────────────────────────────────── */
 const CONFIG = {
 
-    // Solo existirán dos pantallas
-    pantallas: [1,2],
+  /* Pantallas reales que se muestran, en orden de rotación */
+  pantallas: [1, 2, 3, 4],
 
-    // Tiempo de cada pantalla (segundos)
-    duracion:[
-        60,
-        60
-    ]
+  /* Duración de cada pantalla en segundos (mismo orden que "pantallas") */
+  duracion: [
+    1800,   // pantalla 1 — Recepción
+    1800,   // pantalla 2 — Despacho
+    20,     // pantalla 3
+    20      // pantalla 4
+  ],
 
+  /* URLs para pantallas 3 y 4
+     Reemplaza con tus links de Power BI u otros dashboards   */
+  urls: {
+    3: "https://app.powerbi.com/view?r=eyJrIjoiOTY5MDQ5NGYtZDEzYy00NDEyLTgyYmMtYmU1N2ZjODY3ZTdlIiwidCI6IjhiNThmMjM4LWFmOGEtNDE3Ny1hM2U0LTg3YTllY2YxMGRkMyIsImMiOjR9&pageName=ReportSection463df0311d1c33dbb41a",
+    4: "https://app.powerbi.com/view?r=eyJrIjoiOTY5MDQ5NGYtZDEzYy00NDEyLTgyYmMtYmU1N2ZjODY3ZTdlIiwidCI6IjhiNThmMjM4LWFmOGEtNDE3Ny1hM2U0LTg3YTllY2YxMGRkMyIsImMiOjR9&pageName=227e2ce0bbc8860ab032"
+  }
 };
 
 /* ─────────────────────────────────────────────────────────
@@ -608,6 +567,19 @@ function mostrarPantalla(idx) {
   document.querySelectorAll('.dot').forEach((d, i) => {
     d.classList.toggle('activo', i === idx);
   });
+
+  // Pantalla 3 = Power BI 1
+  if (numeroPantalla === 3) {
+    const f = document.getElementById('iframe-3');
+    if (!f.src) f.src = CONFIG.urls[3];
+  }
+
+  // Pantalla 4 = Power BI 2
+  if (numeroPantalla === 4) {
+    const f = document.getElementById('iframe-4');
+    if (!f.src) f.src = CONFIG.urls[4];
+  }
+
   const durMs = CONFIG.duracion[idx] * 1000;
 
   barraEl.style.transition = 'none';
@@ -646,23 +618,19 @@ setInterval(evitarApagado, 5 * 60 * 1000);
 
 
 /* ─────────────────────────────────────────────────────────
-   RELOJ — PANTALLA 1
+   RELOJ — se repite en el encabezado de Recepción y Despacho
 ───────────────────────────────────────────────────────── */
 function actualizarFechaHora() {
 
-    const ahora = new Date();
+  const ahora = new Date();
 
-    const texto =
-        ahora.toLocaleDateString('es-PE') +
-        "<br>" +
-        ahora.toLocaleTimeString('es-PE');
+  const texto =
+    ahora.toLocaleDateString('es-PE') +
+    '<br>' +
+    ahora.toLocaleTimeString('es-PE');
 
-    const reloj1=document.getElementById("fechaHora");
-    const reloj2=document.getElementById("fechaHora2");
-
-    if(reloj1) reloj1.innerHTML=texto;
-    if(reloj2) reloj2.innerHTML=texto;
-
+  document.querySelectorAll('.js-reloj')
+    .forEach(reloj => reloj.innerHTML = texto);
 }
 
 setInterval(actualizarFechaHora, 1000);
@@ -670,8 +638,7 @@ actualizarFechaHora();
 
 /* ─────────────────────────────────────────────────────────
    DATOS OPERATIVOS — Google Sheets → Opensheet
-   Pantalla 1 = Recepción
-   Pantalla 2 = Despacho
+   (solo Recepción y Despacho, usados por la pantalla 1)
 ───────────────────────────────────────────────────────── */
 const URL_RECEPCION =
   'https://opensheet.elk.sh/1KvOP5RidG-dx5a2XBlLoMVbhXXa82yA0zlwp6poKLiY/RECEPCION';
@@ -728,8 +695,6 @@ async function cargarDatos() {
   const hoyFecha = new Date();
   hoyFecha.setHours(0, 0, 0, 0);
 
-  /* ================= RECEPCIÓN ================= */
-
   const recHoy = recepcion.filter(r => {
 
     const fechaCita = convertirFecha(r['Fecha Cita']);
@@ -744,8 +709,6 @@ async function cargarDatos() {
     return hoyFecha <= fechaCierre;
 
   });
-
-  /* ================= DESPACHO ================= */
 
   const desHoy = despacho.filter(d => {
 
@@ -762,124 +725,64 @@ async function cargarDatos() {
 
   });
 
-  /* ================= RECEPCIONES ================= */
-
-  let palletsRec = 0;
-  let pendientesRec = 0;
+  /* —— RECEPCIONES —— */
+  let palletsRec = 0, pendientesRec = 0;
   let htmlRec = '';
 
   recHoy.forEach(r => {
-
-    const atencion = estado(r['Hora Llegada'], r['Hora Terminó']);
-    const acond = estado(r['Inicio Acondicionado'], r['Fin Acondicionado']);
-
+    const atencion = estado(r['Hora Llegada'],        r['Hora Terminó']);
+    const acond    = estado(r['Inicio Acondicionado'], r['Fin Acondicionado']);
     if (!r['Hora Terminó']) pendientesRec++;
-
     palletsRec += Number(r['Cantidad Pallet'] || 0);
 
     htmlRec += `
       <tr>
         <td>${r['N° Atención'] || '-'}</td>
-        <td>${r['Fecha Cita'] || '-'}</td>
-        <td>${r['Proveedor'] || '-'}</td>
-        <td>${r['Placa'] || '-'}</td>
+        <td>${r['Fecha Cita']       || '-'}</td>
+        <td>${r['Proveedor']       || '-'}</td>
+        <td>${r['Placa']       || '-'}</td>
         <td>${r['Cod. Motivo'] || '-'}</td>
         <td><span class="estado ${atencion[1]}">${atencion[0]}</span></td>
-        <td>${diferencia(r['Hora Llegada'], r['Hora Terminó'])}</td>
+        <td>${diferencia(r['Hora Llegada'],        r['Hora Terminó'])}</td>
         <td><span class="estado ${acond[1]}">${acond[0]}</span></td>
         <td>${diferencia(r['Inicio Acondicionado'], r['Fin Acondicionado'])}</td>
       </tr>`;
   });
 
-  document.getElementById("tablaRecepcion").innerHTML = htmlRec;
+  document.getElementById('tablaRecepcion').innerHTML = htmlRec;
+  document.getElementById('rAtendidos').textContent  = recHoy.length;
+  document.getElementById('rPendientes').textContent = pendientesRec;
+  document.getElementById('rPallets').textContent    = palletsRec;
 
-  document.getElementById("rAtendidos").textContent = recHoy.length;
-  document.getElementById("rPendientes").textContent = pendientesRec;
-  document.getElementById("rPallets").textContent = palletsRec;
-
-  /* ================= DESPACHOS ================= */
-
-  let palletsDes = 0;
-  let pendientesDes = 0;
-
-  let pickingProceso = 0;
-  let packingProceso = 0;
-  let finalizados = 0;
-
-  let htmlDes = "";
+  /* —— DESPACHOS —— */
+  let palletsDes = 0, pendientesDes = 0;
+  let htmlDes = '';
 
   desHoy.forEach(d => {
-
-    const picking = estado(d["Inicio Picking"], d["Fin Picking"]);
-    const packing = estado(d["Inicio Packing"], d["Fin Packing"]);
-    const atencion = estado(d["Hora Llegada"], d["Fin Carga"]);
-
-    if (!d["Fin Carga"]) pendientesDes++;
-
-    palletsDes += Number(d["Cantidad Pallet"] || 0);
-
-    // KPIs
-
-    if (d["Inicio Picking"] && !d["Fin Picking"])
-      pickingProceso++;
-
-    if (d["Inicio Packing"] && !d["Fin Packing"])
-      packingProceso++;
-
-    if (d["Fin Carga"])
-      finalizados++;
+    const picking  = estado(d['Inicio Picking'], d['Fin Picking']);
+    const packing  = estado(d['Inicio Packing'], d['Fin Packing']);
+    const atencion = estado(d['Hora Llegada'],   d['Fin Carga']);
+    if (!d['Fin Carga']) pendientesDes++;
+    palletsDes += Number(d['Cantidad Pallet'] || 0);
 
     htmlDes += `
       <tr>
-        <td>${d["N° Atención"] || "-"}</td>
-        <td>${d["Placa"] || "-"}</td>
-        <td>${d["Cod. Motivo\r"] || d["Cod. Motivo"] || "-"}</td>
+        <td>${d['N° Atención'] || '-'}</td>
+        <td>${d['Placa']       || '-'}</td>
+        <td>${d['Cod. Motivo\r'] || d['Cod. Motivo'] || '-'}</td>
         <td><span class="estado ${picking[1]}">${picking[0]}</span></td>
-        <td>${diferencia(d["Inicio Picking"], d["Fin Picking"])}</td>
+        <td>${diferencia(d['Inicio Picking'], d['Fin Picking'])}</td>
         <td><span class="estado ${packing[1]}">${packing[0]}</span></td>
-        <td>${diferencia(d["Inicio Packing"], d["Fin Packing"])}</td>
+        <td>${diferencia(d['Inicio Packing'], d['Fin Packing'])}</td>
         <td><span class="estado ${atencion[1]}">${atencion[0]}</span></td>
-        <td>${diferencia(d["Hora Llegada"], d["Fin Carga"])}</td>
+        <td>${diferencia(d['Hora Llegada'],   d['Fin Carga'])}</td>
       </tr>`;
   });
 
-  /* ================= TABLAS ================= */
-
-  const tabla1 = document.getElementById("tablaDespacho");
-
-  if (tabla1)
-    tabla1.innerHTML = htmlDes;
-
-  const tabla2 = document.getElementById("tablaDespacho2");
-
-  if (tabla2)
-    tabla2.innerHTML = htmlDes;
-
-  /* ================= KPIs PANTALLA 1 ================= */
-
-  document.getElementById("dAtendidos").textContent = desHoy.length;
-  document.getElementById("dPendientes").textContent = pendientesDes;
-  document.getElementById("dPallets").textContent = palletsDes;
-
-  /* ================= KPIs PANTALLA 2 ================= */
-
-  const a2 = document.getElementById("dAtendidos2");
-  const p2 = document.getElementById("dPendientes2");
-  const pal2 = document.getElementById("dPallets2");
-
-  if (a2) a2.textContent = desHoy.length;
-  if (p2) p2.textContent = pendientesDes;
-  if (pal2) pal2.textContent = palletsDes;
-
-  const kp = document.getElementById("kpiPicking");
-  if (kp) kp.textContent = pickingProceso;
-
-  const kpa = document.getElementById("kpiPacking");
-  if (kpa) kpa.textContent = packingProceso;
-
-  const kf = document.getElementById("kpiFinalizados");
-  if (kf) kf.textContent = finalizados;
-
+  document.getElementById('tablaDespacho').innerHTML  = htmlDes;
+  document.getElementById('dAtendidos').textContent   = desHoy.length;
+  document.getElementById('dPendientes').textContent  = pendientesDes;
+  document.getElementById('dPallets').textContent     = palletsDes;
 }
 
 cargarDatos();
@@ -889,3 +792,4 @@ setInterval(cargarDatos, 30000);
 </script>
 </body>
 </html>
+
